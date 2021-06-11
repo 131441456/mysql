@@ -1,0 +1,159 @@
+
+Setting environment for using XAMPP for Windows.
+hp@DESKTOP-O8M241J c:\xampp
+# mysql -h localhost -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.4.18-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> create database mits;
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [(none)]> use mits;
+Database changed
+MariaDB [mits]> create table teacher(id int not null auto_increment,name varchar(50),city varchar(50), email varchar(50), phone varchar(10),address varchar(100), salary varchar(10), deft varchar(50), branch varchar(50), primary key(id));
+Query OK, 0 rows affected (0.055 sec)
+
+MariaDB [mits]> insert into teacher(name,city,email,phone,address,salary,deft,branch) value('anurag','gwalior','anurag@gmail.com',7865375648,'cp colony',60000,'ECE','ECE');
+Query OK, 1 row affected (0.079 sec)
+
+MariaDB [mits]> insert into teacher(name,city,email,phone,address,salary,deft,branch) value('vinit','indore','vinit@gmail.com',8965375648,'vinay colony',50000,'ECE','CSE');
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [mits]> insert into teacher(name,city,email,phone,address,salary,deft,branch) value('shivani','jaipur','shivani@gmail.com',9981384796,'anand nagar',40000,'cse','ec');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [mits]> select* from teacher where name=anurag;
+ERROR 1054 (42S22): Unknown column 'anurag' in 'where clause'
+MariaDB [mits]> select* from teacher where name= 'anurag';
++----+--------+---------+------------------+------------+-----------+--------+------+--------+
+| id | name   | city    | email            | phone      | address   | salary | deft | branch |
++----+--------+---------+------------------+------------+-----------+--------+------+--------+
+|  1 | anurag | gwalior | anurag@gmail.com | 7865375648 | cp colony | 60000  | ECE  | ECE    |
++----+--------+---------+------------------+------------+-----------+--------+------+--------+
+1 row in set (0.014 sec)
+
+MariaDB [mits]> select * from teacher where name ='vinit' and city ='indore'
+    -> select * from teacher where name ='vinit' and city ='indore';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'select * from teacher where name ='vinit' and city ='indore'' at line 2
+MariaDB [mits]> select * from teacher where name ='vinit' AND city ='indore';
++----+-------+--------+-----------------+------------+--------------+--------+------+--------+
+| id | name  | city   | email           | phone      | address      | salary | deft | branch |
++----+-------+--------+-----------------+------------+--------------+--------+------+--------+
+|  2 | vinit | indore | vinit@gmail.com | 8965375648 | vinay colony | 50000  | ECE  | CSE    |
++----+-------+--------+-----------------+------------+--------------+--------+------+--------+
+1 row in set (0.002 sec)
+
+MariaDB [mits]> select * from teacher where name ='vinit' or city ='jaipur';
++----+---------+--------+-------------------+------------+--------------+--------+------+--------+
+| id | name    | city   | email             | phone      | address      | salary | deft | branch |
++----+---------+--------+-------------------+------------+--------------+--------+------+--------+
+|  2 | vinit   | indore | vinit@gmail.com   | 8965375648 | vinay colony | 50000  | ECE  | CSE    |
+|  3 | shivani | jaipur | shivani@gmail.com | 9981384796 | anand nagar  | 40000  | cse  | ec     |
++----+---------+--------+-------------------+------------+--------------+--------+------+--------+
+2 rows in set (0.001 sec)
+
+MariaDB [mits]>  select * from teacher where name in ('shivani');
++----+---------+--------+-------------------+------------+-------------+--------+------+--------+
+| id | name    | city   | email             | phone      | address     | salary | deft | branch |
++----+---------+--------+-------------------+------------+-------------+--------+------+--------+
+|  3 | shivani | jaipur | shivani@gmail.com | 9981384796 | anand nagar | 40000  | cse  | ec     |
++----+---------+--------+-------------------+------------+-------------+--------+------+--------+
+1 row in set (0.002 sec)
+
+MariaDB [mits]> select * from teacher where id between 1 and 2;
++----+--------+---------+------------------+------------+--------------+--------+------+--------+
+| id | name   | city    | email            | phone      | address      | salary | deft | branch |
++----+--------+---------+------------------+------------+--------------+--------+------+--------+
+|  1 | anurag | gwalior | anurag@gmail.com | 7865375648 | cp colony    | 60000  | ECE  | ECE    |
+|  2 | vinit  | indore  | vinit@gmail.com  | 8965375648 | vinay colony | 50000  | ECE  | CSE    |
++----+--------+---------+------------------+------------+--------------+--------+------+--------+
+2 rows in set (0.006 sec)
+
+MariaDB [mits]> select * from teacher order by desc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'desc' at line 1
+MariaDB [mits]> select * from teacher order by id desc;
++----+---------+---------+-------------------+------------+--------------+--------+------+--------+
+| id | name    | city    | email             | phone      | address      | salary | deft | branch |
++----+---------+---------+-------------------+------------+--------------+--------+------+--------+
+|  3 | shivani | jaipur  | shivani@gmail.com | 9981384796 | anand nagar  | 40000  | cse  | ec     |
+|  2 | vinit   | indore  | vinit@gmail.com   | 8965375648 | vinay colony | 50000  | ECE  | CSE    |
+|  1 | anurag  | gwalior | anurag@gmail.com  | 7865375648 | cp colony    | 60000  | ECE  | ECE    |
++----+---------+---------+-------------------+------------+--------------+--------+------+--------+
+3 rows in set (0.000 sec)
+
+MariaDB [mits]> select * from teacher where ('salary' between 40000 AND  50000) AND ('ECE'AND 'ECE');
+Empty set, 13 warnings (0.004 sec)
+
+MariaDB [mits]> select * from teacher where Name LIKE 'a%';
++----+--------+---------+------------------+------------+-----------+--------+------+--------+
+| id | name   | city    | email            | phone      | address   | salary | deft | branch |
++----+--------+---------+------------------+------------+-----------+--------+------+--------+
+|  1 | anurag | gwalior | anurag@gmail.com | 7865375648 | cp colony | 60000  | ECE  | ECE    |
++----+--------+---------+------------------+------------+-----------+--------+------+--------+
+1 row in set (0.001 sec)
+
+MariaDB [mits]> select * from teacher where Name LIKE '%g';
++----+--------+---------+------------------+------------+-----------+--------+------+--------+
+| id | name   | city    | email            | phone      | address   | salary | deft | branch |
++----+--------+---------+------------------+------------+-----------+--------+------+--------+
+|  1 | anurag | gwalior | anurag@gmail.com | 7865375648 | cp colony | 60000  | ECE  | ECE    |
++----+--------+---------+------------------+------------+-----------+--------+------+--------+
+1 row in set (0.001 sec)
+
+MariaDB [mits]> select * from teacher where Name LIKE '%n%';
++----+---------+---------+-------------------+------------+--------------+--------+------+--------+
+| id | name    | city    | email             | phone      | address      | salary | deft | branch |
++----+---------+---------+-------------------+------------+--------------+--------+------+--------+
+|  1 | anurag  | gwalior | anurag@gmail.com  | 7865375648 | cp colony    | 60000  | ECE  | ECE    |
+|  2 | vinit   | indore  | vinit@gmail.com   | 8965375648 | vinay colony | 50000  | ECE  | CSE    |
+|  3 | shivani | jaipur  | shivani@gmail.com | 9981384796 | anand nagar  | 40000  | cse  | ec     |
++----+---------+---------+-------------------+------------+--------------+--------+------+--------+
+3 rows in set (0.001 sec)
+
+MariaDB [mits]> insert into teacher(name,city,email,phone,address,salary,deft,branch) value('anurag','gwalior','anurag@gmail.com',7865375648,'cp colony',60000,'ECE','ECE');
+Query OK, 1 row affected (0.008 sec)
+
+MariaDB [mits]> create table teacher(id int not null auto_increment,name varchar(50),city varchar(50), email varchar(50) UNIQUE KEY , phone varchar(10) UNIQUE KEY , copan varchar(50) UNIQUE KEY, address varchar(100), salary varchar(10), deft varchar(50), branch varchar(50), primary key(id));
+ERROR 1050 (42S01): Table 'teacher' already exists
+MariaDB [mits]> create table AB(id int not null auto_increment,name varchar(50),city varchar(50), email varchar(50) UNIQUE KEY , phone varchar(10) UNIQUE KEY , copan varchar(50) UNIQUE KEY,  primary key(id));
+Query OK, 0 rows affected (0.055 sec)
+
+MariaDB [mits]> insert into teacher(name,city,email,copan) value('anurag','gwalior','anurag@gmail.com',7865375648,'swiggy60');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+MariaDB [mits]> insert into teacher(name,city,email,phone,copan) value('anurag','gwalior','anurag@gmail.com',7865375648,'swiggy60');
+ERROR 1054 (42S22): Unknown column 'copan' in 'field list'
+MariaDB [mits]> insert into teacher(name,city,email,phone,) value('anurag','gwalior','anurag@gmail.com',7865375648,);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ') value('anurag','gwalior','anurag@gmail.com',7865375648,)' at line 1
+MariaDB [mits]> insert into teacher(name,city,email,phone,copan) value('anurag','gwalior','anurag@gmail.com',7865375648, 'swiggy60');
+ERROR 1054 (42S22): Unknown column 'copan' in 'field list'
+MariaDB [mits]> create table AB(id int not null auto_increment,name varchar(50),city varchar(50), email varchar(50) UNIQUE KEY , phone varchar(10) UNIQUE KEY , coupon varchar(50) UNIQUE KEY,  primary key(id));
+ERROR 1050 (42S01): Table 'ab' already exists
+MariaDB [mits]> insert into teacher(name,city,email,phone,coupon) value('anurag','gwalior','anurag@gmail.com',7865375648, 'swiggy60');
+ERROR 1054 (42S22): Unknown column 'coupon' in 'field list'
+MariaDB [mits]> desc AB;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| id    | int(11)     | NO   | PRI | NULL    | auto_increment |
+| name  | varchar(50) | YES  |     | NULL    |                |
+| city  | varchar(50) | YES  |     | NULL    |                |
+| email | varchar(50) | YES  | UNI | NULL    |                |
+| phone | varchar(10) | YES  | UNI | NULL    |                |
+| copan | varchar(50) | YES  | UNI | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+6 rows in set (0.056 sec)
+
+MariaDB [mits]> insert into AB(name,city,email,phone,copon) value('anurag','gwalior','anurag@gmail.com',7865375648, 'swiggy60');
+ERROR 1054 (42S22): Unknown column 'copon' in 'field list'
+MariaDB [mits]> insert into AB(name,city,email,phone,copan) value('anurag','gwalior','anurag@gmail.com',7865375648, 'swiggy60');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [mits]> insert into AB(name,city,email,phone,copan) value('anurag','gwalior','anurag@gmail.com',7865375648, 'swiggy60');
+ERROR 1062 (23000): Duplicate entry 'anurag@gmail.com' for key 'email'
+MariaDB [mits]>

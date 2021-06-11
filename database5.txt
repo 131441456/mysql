@@ -1,0 +1,253 @@
+
+Setting environment for using XAMPP for Windows.
+hp@DESKTOP-O8M241J c:\xampp
+# mysql -h localhost -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.4.18-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> create database mits6;
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [(none)]> use mits6;
+Database changed
+MariaDB [mits6]> create table employee(id int not null auto_increment,name varchar(50),city varchar(50), email varchar(50)UNIQUE KEY, phone varchar(10) UNIQUE KEY,address varchar(100), salary varchar(10), deft varchar(50), collage varchar(50), primary key(id));
+Query OK, 0 rows affected (0.064 sec)
+
+MariaDB [mits6]> insert into employee(name,city,email,phone,address,salary,deft,collage)value('shivani','gurgaon','shivani@hmra.in',8962584794,'4a barah bigha',20000,'web developer','IPS')
+    -> ;
+Query OK, 1 row affected (0.070 sec)
+
+MariaDB [mits6]> insert into employee(name,city,email,phone,address,salary,deft,collage)value('rohit','gwalior','rchugwani3@gmail.com',9981384969,'samadiyha colony',30000,'web design','ITM');
+Query OK, 1 row affected (0.006 sec)
+
+MariaDB [mits6]> insert into employee(name,city,email,phone,address,salary,deft,collage)value('rishabh','pune','rishabh@hmra.in',9944584794,'daulat ganj',30000,'hr','iim');
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [mits6]> Select*from employee where name='rohit';
++----+-------+---------+----------------------+------------+------------------+--------+------------+---------+
+| id | name  | city    | email                | phone      | address          | salary | deft       | collage |
++----+-------+---------+----------------------+------------+------------------+--------+------------+---------+
+|  2 | rohit | gwalior | rchugwani3@gmail.com | 9981384969 | samadiyha colony | 30000  | web design | ITM     |
++----+-------+---------+----------------------+------------+------------------+--------+------------+---------+
+1 row in set (0.016 sec)
+
+MariaDB [mits6]> Select*from employee where name='rohit'
+    -> ;
++----+-------+---------+----------------------+------------+------------------+--------+------------+---------+
+| id | name  | city    | email                | phone      | address          | salary | deft       | collage |
++----+-------+---------+----------------------+------------+------------------+--------+------------+---------+
+|  2 | rohit | gwalior | rchugwani3@gmail.com | 9981384969 | samadiyha colony | 30000  | web design | ITM     |
++----+-------+---------+----------------------+------------+------------------+--------+------------+---------+
+1 row in set (0.000 sec)
+
+MariaDB [mits6]> Select*from employee where name='rohit' AND city='gwalior';
++----+-------+---------+----------------------+------------+------------------+--------+------------+---------+
+| id | name  | city    | email                | phone      | address          | salary | deft       | collage |
++----+-------+---------+----------------------+------------+------------------+--------+------------+---------+
+|  2 | rohit | gwalior | rchugwani3@gmail.com | 9981384969 | samadiyha colony | 30000  | web design | ITM     |
++----+-------+---------+----------------------+------------+------------------+--------+------------+---------+
+1 row in set (0.002 sec)
+
+MariaDB [mits6]> Select*from employee where name='rohit' AND city='gwalior' or salary=20000;
++----+---------+---------+----------------------+------------+------------------+--------+---------------+---------+
+| id | name    | city    | email                | phone      | address          | salary | deft          | collage |
++----+---------+---------+----------------------+------------+------------------+--------+---------------+---------+
+|  1 | shivani | gurgaon | shivani@hmra.in      | 8962584794 | 4a barah bigha   | 20000  | web developer | IPS     |
+|  2 | rohit   | gwalior | rchugwani3@gmail.com | 9981384969 | samadiyha colony | 30000  | web design    | ITM     |
++----+---------+---------+----------------------+------------+------------------+--------+---------------+---------+
+2 rows in set (0.003 sec)
+
+MariaDB [mits6]>  desc employee;
++---------+--------------+------+-----+---------+----------------+
+| Field   | Type         | Null | Key | Default | Extra          |
++---------+--------------+------+-----+---------+----------------+
+| id      | int(11)      | NO   | PRI | NULL    | auto_increment |
+| name    | varchar(50)  | YES  |     | NULL    |                |
+| city    | varchar(50)  | YES  |     | NULL    |                |
+| email   | varchar(50)  | YES  | UNI | NULL    |                |
+| phone   | varchar(10)  | YES  | UNI | NULL    |                |
+| address | varchar(100) | YES  |     | NULL    |                |
+| salary  | varchar(10)  | YES  |     | NULL    |                |
+| deft    | varchar(50)  | YES  |     | NULL    |                |
+| collage | varchar(50)  | YES  |     | NULL    |                |
++---------+--------------+------+-----+---------+----------------+
+9 rows in set (0.031 sec)
+
+MariaDB [mits6]> Select*from employee where name in('rishabh');
++----+---------+------+-----------------+------------+-------------+--------+------+---------+
+| id | name    | city | email           | phone      | address     | salary | deft | collage |
++----+---------+------+-----------------+------------+-------------+--------+------+---------+
+|  3 | rishabh | pune | rishabh@hmra.in | 9944584794 | daulat ganj | 30000  | hr   | iim     |
++----+---------+------+-----------------+------------+-------------+--------+------+---------+
+1 row in set (0.000 sec)
+
+MariaDB [mits6]> Select*from employee where salary =30000;
++----+---------+---------+----------------------+------------+------------------+--------+------------+---------+
+| id | name    | city    | email                | phone      | address          | salary | deft       | collage |
++----+---------+---------+----------------------+------------+------------------+--------+------------+---------+
+|  2 | rohit   | gwalior | rchugwani3@gmail.com | 9981384969 | samadiyha colony | 30000  | web design | ITM     |
+|  3 | rishabh | pune    | rishabh@hmra.in      | 9944584794 | daulat ganj      | 30000  | hr         | iim     |
++----+---------+---------+----------------------+------------+------------------+--------+------------+---------+
+2 rows in set (0.001 sec)
+
+MariaDB [mits6]> Select*from employee where salary between 20000 AND 30000;
++----+---------+---------+----------------------+------------+------------------+--------+---------------+---------+
+| id | name    | city    | email                | phone      | address          | salary | deft          | collage |
++----+---------+---------+----------------------+------------+------------------+--------+---------------+---------+
+|  1 | shivani | gurgaon | shivani@hmra.in      | 8962584794 | 4a barah bigha   | 20000  | web developer | IPS     |
+|  2 | rohit   | gwalior | rchugwani3@gmail.com | 9981384969 | samadiyha colony | 30000  | web design    | ITM     |
+|  3 | rishabh | pune    | rishabh@hmra.in      | 9944584794 | daulat ganj      | 30000  | hr            | iim     |
++----+---------+---------+----------------------+------------+------------------+--------+---------------+---------+
+3 rows in set (0.004 sec)
+
+MariaDB [mits6]> Select*from employee order by desc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'desc' at line 1
+MariaDB [mits6]>  select * from employee order by desc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'desc' at line 1
+MariaDB [mits6]>  select * from employee order by id desc;
++----+---------+---------+----------------------+------------+------------------+--------+---------------+---------+
+| id | name    | city    | email                | phone      | address          | salary | deft          | collage |
++----+---------+---------+----------------------+------------+------------------+--------+---------------+---------+
+|  3 | rishabh | pune    | rishabh@hmra.in      | 9944584794 | daulat ganj      | 30000  | hr            | iim     |
+|  2 | rohit   | gwalior | rchugwani3@gmail.com | 9981384969 | samadiyha colony | 30000  | web design    | ITM     |
+|  1 | shivani | gurgaon | shivani@hmra.in      | 8962584794 | 4a barah bigha   | 20000  | web developer | IPS     |
++----+---------+---------+----------------------+------------+------------------+--------+---------------+---------+
+3 rows in set (0.000 sec)
+
+MariaDB [mits6]>  select * from employee  where name LIKE 'r%';
++----+---------+---------+----------------------+------------+------------------+--------+------------+---------+
+| id | name    | city    | email                | phone      | address          | salary | deft       | collage |
++----+---------+---------+----------------------+------------+------------------+--------+------------+---------+
+|  2 | rohit   | gwalior | rchugwani3@gmail.com | 9981384969 | samadiyha colony | 30000  | web design | ITM     |
+|  3 | rishabh | pune    | rishabh@hmra.in      | 9944584794 | daulat ganj      | 30000  | hr         | iim     |
++----+---------+---------+----------------------+------------+------------------+--------+------------+---------+
+2 rows in set (0.001 sec)
+
+MariaDB [mits6]>  select * from employee  where name LIKE 'r%';
++----+---------+---------+----------------------+------------+------------------+--------+------------+---------+
+| id | name    | city    | email                | phone      | address          | salary | deft       | collage |
++----+---------+---------+----------------------+------------+------------------+--------+------------+---------+
+|  2 | rohit   | gwalior | rchugwani3@gmail.com | 9981384969 | samadiyha colony | 30000  | web design | ITM     |
+|  3 | rishabh | pune    | rishabh@hmra.in      | 9944584794 | daulat ganj      | 30000  | hr         | iim     |
++----+---------+---------+----------------------+------------+------------------+--------+------------+---------+
+2 rows in set (0.001 sec)
+
+MariaDB [mits6]> select * from employee ;
++----+---------+---------+----------------------+------------+------------------+--------+---------------+---------+
+| id | name    | city    | email                | phone      | address          | salary | deft          | collage |
++----+---------+---------+----------------------+------------+------------------+--------+---------------+---------+
+|  1 | shivani | gurgaon | shivani@hmra.in      | 8962584794 | 4a barah bigha   | 20000  | web developer | IPS     |
+|  2 | rohit   | gwalior | rchugwani3@gmail.com | 9981384969 | samadiyha colony | 30000  | web design    | ITM     |
+|  3 | rishabh | pune    | rishabh@hmra.in      | 9944584794 | daulat ganj      | 30000  | hr            | iim     |
++----+---------+---------+----------------------+------------+------------------+--------+---------------+---------+
+3 rows in set (0.000 sec)
+
+MariaDB [mits6]> select name , salary , salary+5000 from employee;
++---------+--------+-------------+
+| name    | salary | salary+5000 |
++---------+--------+-------------+
+| shivani | 20000  |       25000 |
+| rohit   | 30000  |       35000 |
+| rishabh | 30000  |       35000 |
++---------+--------+-------------+
+3 rows in set (0.004 sec)
+
+MariaDB [mits6]> select name , salary , salary+5000 AS "covid vonus 5000" from employee;
++---------+--------+------------------+
+| name    | salary | covid vonus 5000 |
++---------+--------+------------------+
+| shivani | 20000  |            25000 |
+| rohit   | 30000  |            35000 |
+| rishabh | 30000  |            35000 |
++---------+--------+------------------+
+3 rows in set (0.002 sec)
+
+MariaDB [mits6]> show employee;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'employee' at line 1
+MariaDB [mits6]> show table employee;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'employee' at line 1
+MariaDB [mits6]> desc employee;
++---------+--------------+------+-----+---------+----------------+
+| Field   | Type         | Null | Key | Default | Extra          |
++---------+--------------+------+-----+---------+----------------+
+| id      | int(11)      | NO   | PRI | NULL    | auto_increment |
+| name    | varchar(50)  | YES  |     | NULL    |                |
+| city    | varchar(50)  | YES  |     | NULL    |                |
+| email   | varchar(50)  | YES  | UNI | NULL    |                |
+| phone   | varchar(10)  | YES  | UNI | NULL    |                |
+| address | varchar(100) | YES  |     | NULL    |                |
+| salary  | varchar(10)  | YES  |     | NULL    |                |
+| deft    | varchar(50)  | YES  |     | NULL    |                |
+| collage | varchar(50)  | YES  |     | NULL    |                |
++---------+--------------+------+-----+---------+----------------+
+9 rows in set (0.024 sec)
+
+MariaDB [mits6]> alter table employee add column bonus varchar(50);
+Query OK, 0 rows affected (0.025 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [mits6]> desc employee;
++---------+--------------+------+-----+---------+----------------+
+| Field   | Type         | Null | Key | Default | Extra          |
++---------+--------------+------+-----+---------+----------------+
+| id      | int(11)      | NO   | PRI | NULL    | auto_increment |
+| name    | varchar(50)  | YES  |     | NULL    |                |
+| city    | varchar(50)  | YES  |     | NULL    |                |
+| email   | varchar(50)  | YES  | UNI | NULL    |                |
+| phone   | varchar(10)  | YES  | UNI | NULL    |                |
+| address | varchar(100) | YES  |     | NULL    |                |
+| salary  | varchar(10)  | YES  |     | NULL    |                |
+| deft    | varchar(50)  | YES  |     | NULL    |                |
+| collage | varchar(50)  | YES  |     | NULL    |                |
+| bonus   | varchar(50)  | YES  |     | NULL    |                |
++---------+--------------+------+-----+---------+----------------+
+10 rows in set (0.033 sec)
+
+MariaDB [mits6]> select * from employee;
++----+---------+---------+----------------------+------------+------------------+--------+---------------+---------+-------+
+| id | name    | city    | email                | phone      | address          | salary | deft          | collage | bonus |
++----+---------+---------+----------------------+------------+------------------+--------+---------------+---------+-------+
+|  1 | shivani | gurgaon | shivani@hmra.in      | 8962584794 | 4a barah bigha   | 20000  | web developer | IPS     | NULL  |
+|  2 | rohit   | gwalior | rchugwani3@gmail.com | 9981384969 | samadiyha colony | 30000  | web design    | ITM     | NULL  |
+|  3 | rishabh | pune    | rishabh@hmra.in      | 9944584794 | daulat ganj      | 30000  | hr            | iim     | NULL  |
++----+---------+---------+----------------------+------------+------------------+--------+---------------+---------+-------+
+3 rows in set (0.002 sec)
+
+MariaDB [mits6]> alter table employee add column bonus varchar(50) after phone;
+ERROR 1060 (42S21): Duplicate column name 'bonus'
+MariaDB [mits6]> alter table employee add column hr varchar(50) after phone;
+Query OK, 0 rows affected (0.023 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [mits6]> create table itm1(namr varchar(30));
+Query OK, 0 rows affected (0.077 sec)
+
+MariaDB [mits6]> insert into itm1(name)value('rohit'),('shivani');
+ERROR 1054 (42S22): Unknown column 'name' in 'field list'
+MariaDB [mits6]>  alter table employee ADD CONSTRAINT UNIQUE KEY (BONUS);
+Query OK, 0 rows affected (0.025 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [mits6]> alter table employee change column city address varchar(50);
+ERROR 1060 (42S21): Duplicate column name 'address'
+MariaDB [mits6]> alter table employee change column city ourteam varchar(50);
+Query OK, 0 rows affected (0.021 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [mits6]> select * from employee;
++----+---------+---------+----------------------+------------+------+------------------+--------+---------------+---------+-------+
+| id | name    | ourteam | email                | phone      | hr   | address          | salary | deft          | collage | bonus |
++----+---------+---------+----------------------+------------+------+------------------+--------+---------------+---------+-------+
+|  1 | shivani | gurgaon | shivani@hmra.in      | 8962584794 | NULL | 4a barah bigha   | 20000  | web developer | IPS     | NULL  |
+|  2 | rohit   | gwalior | rchugwani3@gmail.com | 9981384969 | NULL | samadiyha colony | 30000  | web design    | ITM     | NULL  |
+|  3 | rishabh | pune    | rishabh@hmra.in      | 9944584794 | NULL | daulat ganj      | 30000  | hr            | iim     | NULL  |
++----+---------+---------+----------------------+------------+------+------------------+--------+---------------+---------+-------+
+3 rows in set (0.001 sec)
+
+MariaDB [mits6]>

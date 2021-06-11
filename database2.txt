@@ -1,0 +1,157 @@
+
+Setting environment for using XAMPP for Windows.
+hp@DESKTOP-O8M241J c:\xampp
+# mysql -h localhost -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.4.18-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use delhi;
+Database changed
+MariaDB [delhi]> create table teacher( id int not null auto_increment name varchar(50),city varchar(50), email varchar(50) salary varchar(50));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'name varchar(50),city varchar(50), email varchar(50) salary varchar(50))' at line 1MariaDB [delhi]> ;
+ERROR: No query specified
+
+MariaDB [delhi]> create table teacher( id int not null auto_increment name varchar(50),city varchar(50), email varchar(50) salary varchar(50),primary key(id));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'name varchar(50),city varchar(50), email varchar(50) salary varchar(50),prima...' at line 1
+MariaDB [delhi]> create table teacher( id int not null auto_increment name varchar(50),city varchar(50), email varchar(50) salary varchar(50),primary key(id));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'name varchar(50),city varchar(50), email varchar(50) salary varchar(50),prima...' at line 1
+MariaDB [delhi]> create table teacher( id int not null auto_increment, name varchar(50),city varchar(50), email varchar(50) salary varchar(50),primary key(id));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'varchar(50),primary key(id))' at line 1
+MariaDB [delhi]> create table teacher( id int not null auto_increment, name varchar(50),city varchar(50), email varchar(50), salary varchar(50),primary key(id));
+Query OK, 0 rows affected (0.047 sec)
+
+MariaDB [delhi]> insert into teacher(name,city,email,salary) value('shivani','gwalior','shivani@hmra.in','20000');
+Query OK, 1 row affected (0.077 sec)
+
+MariaDB [delhi]> insert into teacher(name,city,email,salary) value('shivani','gwalior','shivani@hmra.in','20000');
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [delhi]> insert into teacher(name,city,email,salary) value('shivani','gwalior','shivani@hmra.in','20000');
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [delhi]> select*from teacher;
++----+---------+---------+-----------------+--------+
+| id | name    | city    | email           | salary |
++----+---------+---------+-----------------+--------+
+|  1 | shivani | gwalior | shivani@hmra.in | 20000  |
+|  2 | shivani | gwalior | shivani@hmra.in | 20000  |
+|  3 | shivani | gwalior | shivani@hmra.in | 20000  |
++----+---------+---------+-----------------+--------+
+3 rows in set (0.011 sec)
+
+MariaDB [delhi]> show tables;
++-----------------+
+| Tables_in_delhi |
++-----------------+
+| abc             |
+| teacher         |
+| user            |
++-----------------+
+3 rows in set (0.008 sec)
+
+MariaDB [delhi]> select* from teacher where city ='gwalior';
++----+---------+---------+-----------------+--------+
+| id | name    | city    | email           | salary |
++----+---------+---------+-----------------+--------+
+|  1 | shivani | gwalior | shivani@hmra.in | 20000  |
+|  2 | shivani | gwalior | shivani@hmra.in | 20000  |
+|  3 | shivani | gwalior | shivani@hmra.in | 20000  |
++----+---------+---------+-----------------+--------+
+3 rows in set (0.010 sec)
+
+MariaDB [delhi]> select*from where salary =20000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'where salary =20000' at line 1
+MariaDB [delhi]> select* from teacher where salary=20000;
++----+---------+---------+-----------------+--------+
+| id | name    | city    | email           | salary |
++----+---------+---------+-----------------+--------+
+|  1 | shivani | gwalior | shivani@hmra.in | 20000  |
+|  2 | shivani | gwalior | shivani@hmra.in | 20000  |
+|  3 | shivani | gwalior | shivani@hmra.in | 20000  |
++----+---------+---------+-----------------+--------+
+3 rows in set (0.005 sec)
+
+MariaDB [delhi]> select name, salary from teacher =20000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '20000' at line 1
+MariaDB [delhi]> select name, salary from teacher where  =20000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '=20000' at line 1
+MariaDB [delhi]> select name, salary from teacher where salary  = 20000;
++---------+--------+
+| name    | salary |
++---------+--------+
+| shivani | 20000  |
+| shivani | 20000  |
+| shivani | 20000  |
++---------+--------+
+3 rows in set (0.003 sec)
+
+MariaDB [delhi]> insert into teacher(name,city,email,salary) value('shivi','gurgaon','shivanibansal8962@gmail.com','40000');
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [delhi]> insert into teacher(name,city,email,salary) value('shikha','gurgaon','shivanibansal8962@gmail.com','60000');
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [delhi]> Select * from teacher;
++----+---------+---------+-----------------------------+--------+
+| id | name    | city    | email                       | salary |
++----+---------+---------+-----------------------------+--------+
+|  1 | shivani | gwalior | shivani@hmra.in             | 20000  |
+|  2 | shivani | gwalior | shivani@hmra.in             | 20000  |
+|  3 | shivani | gwalior | shivani@hmra.in             | 20000  |
+|  4 | shivi   | gurgaon | shivanibansal8962@gmail.com | 40000  |
+|  5 | shikha  | gurgaon | shivanibansal8962@gmail.com | 60000  |
++----+---------+---------+-----------------------------+--------+
+5 rows in set (0.000 sec)
+
+MariaDB [delhi]> select name, salary from teacher where salary =>20000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '>20000' at line 1
+MariaDB [delhi]> select name, salary from teacher where salary >20000;
++--------+--------+
+| name   | salary |
++--------+--------+
+| shivi  | 40000  |
+| shikha | 60000  |
++--------+--------+
+2 rows in set (0.002 sec)
+
+MariaDB [delhi]> selct name from teacher where name ! shivani;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'selct name from teacher where name ! shivani' at line 1
+MariaDB [delhi]> select name from teacher where name != 'shivani';
++--------+
+| name   |
++--------+
+| shivi  |
+| shikha |
++--------+
+2 rows in set (0.000 sec)
+
+MariaDB [delhi]> select * from teacher where name ='shivani' AND  email='shivani@hmra.in';
++----+---------+---------+-----------------+--------+
+| id | name    | city    | email           | salary |
++----+---------+---------+-----------------+--------+
+|  1 | shivani | gwalior | shivani@hmra.in | 20000  |
+|  2 | shivani | gwalior | shivani@hmra.in | 20000  |
+|  3 | shivani | gwalior | shivani@hmra.in | 20000  |
++----+---------+---------+-----------------+--------+
+3 rows in set (0.003 sec)
+
+MariaDB [delhi]> select * from teacher where name ='shivani' AND  email='shivanibansal8962@';
+Empty set (0.001 sec)
+
+MariaDB [delhi]> select * from teacher where name ='shivani' or  email='shivanibansal8962@';
++----+---------+---------+-----------------+--------+
+| id | name    | city    | email           | salary |
++----+---------+---------+-----------------+--------+
+|  1 | shivani | gwalior | shivani@hmra.in | 20000  |
+|  2 | shivani | gwalior | shivani@hmra.in | 20000  |
+|  3 | shivani | gwalior | shivani@hmra.in | 20000  |
++----+---------+---------+-----------------+--------+
+3 rows in set (0.001 sec)
+
+MariaDB [delhi]>

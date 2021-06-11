@@ -1,0 +1,196 @@
+
+Setting environment for using XAMPP for Windows.
+hp@DESKTOP-O8M241J c:\xampp
+# mysql -h localhost -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.4.18-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> create database itm;
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| delhi              |
+| information_schema |
+| itm                |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| pninfosys          |
+| test               |
++--------------------+
+8 rows in set (0.044 sec)
+
+MariaDB [(none)]> craete table studentid int not null auto_increment, name varchar(50),city varchar(50), email varchar(50), salary varchar(50),primary key(id));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'craete table studentid int not null auto_increment, name varchar(50),city var...' at line 1
+MariaDB [(none)]> create table student(id int not null auto_increment,name varchar(50),city varchar(50), email varchar(50), phone varchar(10),address varchar(100), salary varchar(10));
+ERROR 1046 (3D000): No database selected
+MariaDB [(none)]> create table student(id int not null auto_increment,name varchar(50),city varchar(50), email varchar(50), phone varchar(10),address varchar(100), salary varchar(10));
+ERROR 1046 (3D000): No database selected
+MariaDB [(none)]> use itm;
+Database changed
+MariaDB [itm]> create table student(id int not null auto_increment,name varchar(50),city varchar(50), email varchar(50), phone varchar(10),address varchar(100), salary varchar(10));
+ERROR 1075 (42000): Incorrect table definition; there can be only one auto column and it must be defined as a key
+MariaDB [itm]> create table student(id int not null auto_increment,name varchar(50),city varchar(50), email varchar(50), phone varchar(10),address varchar(100), salary varchar(10), primarykey(id));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '(id))' at line 1
+MariaDB [itm]> create table student(id int not null auto_increment,name varchar(50),city varchar(50), email varchar(50), phone varchar(10),address varchar(100), salary varchar(10), primary key(id));
+Query OK, 0 rows affected (0.049 sec)
+
+MariaDB [itm]> insert into student(name,city,email,phone,address,salary) value('shivani','gwalior','shivi@hmra.in',8962584794,'gwalior',20000);
+Query OK, 1 row affected (0.061 sec)
+
+MariaDB [itm]> insert into student(name,city,email,phone,address,salary) value('shivani','ggurgaon','shivi@hmra.com',8962545794,'4a barah bigha',30000);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [itm]> insert into student(name,city,email,phone,address,salary) value('shivi','gwalior','shivi@gmail.com',8962584794,'iklod',40000);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [itm]> select*from student;
++----+---------+----------+-----------------+------------+----------------+--------+
+| id | name    | city     | email           | phone      | address        | salary |
++----+---------+----------+-----------------+------------+----------------+--------+
+|  1 | shivani | gwalior  | shivi@hmra.in   | 8962584794 | gwalior        | 20000  |
+|  2 | shivani | ggurgaon | shivi@hmra.com  | 8962545794 | 4a barah bigha | 30000  |
+|  3 | shivi   | gwalior  | shivi@gmail.com | 8962584794 | iklod          | 40000  |
++----+---------+----------+-----------------+------------+----------------+--------+
+3 rows in set (0.003 sec)
+
+MariaDB [itm]> select * from student where name ='shivani' AND  salary =20000;
++----+---------+---------+---------------+------------+---------+--------+
+| id | name    | city    | email         | phone      | address | salary |
++----+---------+---------+---------------+------------+---------+--------+
+|  1 | shivani | gwalior | shivi@hmra.in | 8962584794 | gwalior | 20000  |
++----+---------+---------+---------------+------------+---------+--------+
+1 row in set (0.004 sec)
+
+MariaDB [itm]> select*from student where name ='shivani' and (stu id=3 OR address = 'gwlior');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'id=3 OR address = 'gwlior')' at line 1
+MariaDB [itm]> select*from student where name ='shivani' and (id=3 OR address = 'gwlior');
+Empty set (0.007 sec)
+
+MariaDB [itm]> select*from student where name ='shivani' and (id=1 OR address = 'gwlior');
++----+---------+---------+---------------+------------+---------+--------+
+| id | name    | city    | email         | phone      | address | salary |
++----+---------+---------+---------------+------------+---------+--------+
+|  1 | shivani | gwalior | shivi@hmra.in | 8962584794 | gwalior | 20000  |
++----+---------+---------+---------------+------------+---------+--------+
+1 row in set (0.001 sec)
+
+MariaDB [itm]> select*from student where name ='shivani' and (id=1 OR address = 'iklod');
++----+---------+---------+---------------+------------+---------+--------+
+| id | name    | city    | email         | phone      | address | salary |
++----+---------+---------+---------------+------------+---------+--------+
+|  1 | shivani | gwalior | shivi@hmra.in | 8962584794 | gwalior | 20000  |
++----+---------+---------+---------------+------------+---------+--------+
+1 row in set (0.001 sec)
+
+MariaDB [itm]> insert into student(name,city,email,phone,address,salary) value('shivani','ggurgaon','shivi@hmra.com',8962545794,'4a barah bigha',30000);
+Query OK, 1 row affected (0.007 sec)
+
+MariaDB [itm]> select* from student;
++----+---------+----------+-----------------+------------+----------------+--------+
+| id | name    | city     | email           | phone      | address        | salary |
++----+---------+----------+-----------------+------------+----------------+--------+
+|  1 | shivani | gwalior  | shivi@hmra.in   | 8962584794 | gwalior        | 20000  |
+|  2 | shivani | ggurgaon | shivi@hmra.com  | 8962545794 | 4a barah bigha | 30000  |
+|  3 | shivi   | gwalior  | shivi@gmail.com | 8962584794 | iklod          | 40000  |
+|  4 | shivani | ggurgaon | shivi@hmra.com  | 8962545794 | 4a barah bigha | 30000  |
++----+---------+----------+-----------------+------------+----------------+--------+
+4 rows in set (0.001 sec)
+
+MariaDB [itm]> select * from student where name in ('shivani','shivi');
++----+---------+----------+-----------------+------------+----------------+--------+
+| id | name    | city     | email           | phone      | address        | salary |
++----+---------+----------+-----------------+------------+----------------+--------+
+|  1 | shivani | gwalior  | shivi@hmra.in   | 8962584794 | gwalior        | 20000  |
+|  2 | shivani | ggurgaon | shivi@hmra.com  | 8962545794 | 4a barah bigha | 30000  |
+|  3 | shivi   | gwalior  | shivi@gmail.com | 8962584794 | iklod          | 40000  |
+|  4 | shivani | ggurgaon | shivi@hmra.com  | 8962545794 | 4a barah bigha | 30000  |
++----+---------+----------+-----------------+------------+----------------+--------+
+4 rows in set (0.003 sec)
+
+MariaDB [itm]> select phone from student where name in ('shivani','shivi');
++------------+
+| phone      |
++------------+
+| 8962584794 |
+| 8962545794 |
+| 8962584794 |
+| 8962545794 |
++------------+
+4 rows in set (0.001 sec)
+
+MariaDB [itm]> select * from student where id between 1 and 3;
++----+---------+----------+-----------------+------------+----------------+--------+
+| id | name    | city     | email           | phone      | address        | salary |
++----+---------+----------+-----------------+------------+----------------+--------+
+|  1 | shivani | gwalior  | shivi@hmra.in   | 8962584794 | gwalior        | 20000  |
+|  2 | shivani | ggurgaon | shivi@hmra.com  | 8962545794 | 4a barah bigha | 30000  |
+|  3 | shivi   | gwalior  | shivi@gmail.com | 8962584794 | iklod          | 40000  |
++----+---------+----------+-----------------+------------+----------------+--------+
+3 rows in set (0.006 sec)
+
+MariaDB [itm]> insert into student(name,city,email,phone,address,salary) value('rohit','ggurgaon','shivi@hmra.com',8962545794,'4a barah bigha',40000);
+Query OK, 1 row affected (0.006 sec)
+
+MariaDB [itm]> insert into student(name,city,email,phone,address,salary) value('rishabh','ggurgaon','shivi@hmra.com',8962545794,'4a barah bigha',25000);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [itm]> select* from student
+    -> ;
++----+---------+----------+-----------------+------------+----------------+--------+
+| id | name    | city     | email           | phone      | address        | salary |
++----+---------+----------+-----------------+------------+----------------+--------+
+|  1 | shivani | gwalior  | shivi@hmra.in   | 8962584794 | gwalior        | 20000  |
+|  2 | shivani | ggurgaon | shivi@hmra.com  | 8962545794 | 4a barah bigha | 30000  |
+|  3 | shivi   | gwalior  | shivi@gmail.com | 8962584794 | iklod          | 40000  |
+|  4 | shivani | ggurgaon | shivi@hmra.com  | 8962545794 | 4a barah bigha | 30000  |
+|  5 | rohit   | ggurgaon | shivi@hmra.com  | 8962545794 | 4a barah bigha | 40000  |
+|  6 | rishabh | ggurgaon | shivi@hmra.com  | 8962545794 | 4a barah bigha | 25000  |
++----+---------+----------+-----------------+------------+----------------+--------+
+6 rows in set (0.001 sec)
+
+MariaDB [itm]> select * from student where name not in ('shivi','rohit');
++----+---------+----------+----------------+------------+----------------+--------+
+| id | name    | city     | email          | phone      | address        | salary |
++----+---------+----------+----------------+------------+----------------+--------+
+|  1 | shivani | gwalior  | shivi@hmra.in  | 8962584794 | gwalior        | 20000  |
+|  2 | shivani | ggurgaon | shivi@hmra.com | 8962545794 | 4a barah bigha | 30000  |
+|  4 | shivani | ggurgaon | shivi@hmra.com | 8962545794 | 4a barah bigha | 30000  |
+|  6 | rishabh | ggurgaon | shivi@hmra.com | 8962545794 | 4a barah bigha | 25000  |
++----+---------+----------+----------------+------------+----------------+--------+
+4 rows in set (0.001 sec)
+
+MariaDB [itm]> select * from student where salary not in (20000,25000);
++----+---------+----------+-----------------+------------+----------------+--------+
+| id | name    | city     | email           | phone      | address        | salary |
++----+---------+----------+-----------------+------------+----------------+--------+
+|  2 | shivani | ggurgaon | shivi@hmra.com  | 8962545794 | 4a barah bigha | 30000  |
+|  3 | shivi   | gwalior  | shivi@gmail.com | 8962584794 | iklod          | 40000  |
+|  4 | shivani | ggurgaon | shivi@hmra.com  | 8962545794 | 4a barah bigha | 30000  |
+|  5 | rohit   | ggurgaon | shivi@hmra.com  | 8962545794 | 4a barah bigha | 40000  |
++----+---------+----------+-----------------+------------+----------------+--------+
+4 rows in set (0.000 sec)
+
+MariaDB [itm]> select * from student order by id desc;
++----+---------+----------+-----------------+------------+----------------+--------+
+| id | name    | city     | email           | phone      | address        | salary |
++----+---------+----------+-----------------+------------+----------------+--------+
+|  6 | rishabh | ggurgaon | shivi@hmra.com  | 8962545794 | 4a barah bigha | 25000  |
+|  5 | rohit   | ggurgaon | shivi@hmra.com  | 8962545794 | 4a barah bigha | 40000  |
+|  4 | shivani | ggurgaon | shivi@hmra.com  | 8962545794 | 4a barah bigha | 30000  |
+|  3 | shivi   | gwalior  | shivi@gmail.com | 8962584794 | iklod          | 40000  |
+|  2 | shivani | ggurgaon | shivi@hmra.com  | 8962545794 | 4a barah bigha | 30000  |
+|  1 | shivani | gwalior  | shivi@hmra.in   | 8962584794 | gwalior        | 20000  |
++----+---------+----------+-----------------+------------+----------------+--------+
+6 rows in set (0.001 sec)
+
+MariaDB [itm]>

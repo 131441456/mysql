@@ -1,0 +1,317 @@
+
+Setting environment for using XAMPP for Windows.
+hp@DESKTOP-O8M241J c:\xampp
+# mysql -h localhost -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.4.18-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use pn123;
+Database changed
+MariaDB [pn123]> show tables;
++-----------------+
+| Tables_in_pn123 |
++-----------------+
+| cart            |
+| user            |
++-----------------+
+2 rows in set (0.014 sec)
+
+MariaDB [pn123]> select* from user;
++---------+---------+------------+--------+------+-------+
+| user_id | name    | phone      | salary | deft | email |
++---------+---------+------------+--------+------+-------+
+|       2 | shikha  | 9981584794 | 60000  | ECE  | NULL  |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |
+|       4 | anjali  | 8897584794 | 50000  | ME   | NULL  |
+|       5 | megha   | 9997584794 | 70000  | CE   | NULL  |
++---------+---------+------------+--------+------+-------+
+4 rows in set (0.071 sec)
+
+MariaDB [pn123]> select* from cart;
++------+---------+---------+---------+
+| c_id | p_name  | p_price | user_id |
++------+---------+---------+---------+
+|    1 | shikha  | 500     |       2 |
+|    2 | rishabh | 600     |       3 |
+|    3 | shikha  | 700     |       2 |
+|    4 | rishabh | 900     |       3 |
+|    5 | rishabh | 600     |       3 |
+|    6 | pen     | 900     |       3 |
+|    7 | pen     | 900     |       3 |
++------+---------+---------+---------+
+7 rows in set (0.015 sec)
+
+MariaDB [pn123]> create table order(o_id int not null auto_increment primary key,o_name varchar(50), user_id int not null, foreign key(user_id) references user (user_id));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order(o_id int not null auto_increment primary key,o_name varchar(50), user_i...' at line 1
+MariaDB [pn123]> create table order(o_id int not null auto_increment primary key,o_name varchar(50), user_id int not null, foreign key(uid) references user (user_id));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order(o_id int not null auto_increment primary key,o_name varchar(50), user_i...' at line 1
+MariaDB [pn123]> create table order(o_id int not null auto_increment primary key,o_name varchar(50), uid int not null, foreign key(uid) references user(user_id));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order(o_id int not null auto_increment primary key,o_name varchar(50), uid in...' at line 1
+MariaDB [pn123]> create table order(o_id INT NOT NULL AUTO_INCREMENT primary key, o_name varchar(50), user_id INT NOT NULL, foreign key(user_id) references user(user_id));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order(o_id INT NOT NULL AUTO_INCREMENT primary key, o_name varchar(50), user_...' at line 1
+MariaDB [pn123]> create table order(id INT NOT NULL AUTO_INCREMENT primary key, o_name varchar(50), user_id INT NOT NULL, foreign key(user_id) references user(user_id));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order(id INT NOT NULL AUTO_INCREMENT primary key, o_name varchar(50), user_id...' at line 1
+MariaDB [pn123]> create table order(id INT NOT NULL AUTO_INCREMENT primary key, o_name varchar(50), user_id int);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order(id INT NOT NULL AUTO_INCREMENT primary key, o_name varchar(50), user_id...' at line 1
+MariaDB [pn123]> create table order(id INT NOT NULL AUTO_INCREMENT primary key, o_name varchar(50), user_id int(4));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order(id INT NOT NULL AUTO_INCREMENT primary key, o_name varchar(50), user_id...' at line 1
+MariaDB [pn123]> create table order(id INT NOT NULL AUTO_INCREMENT primary key, o_name varchar(50));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order(id INT NOT NULL AUTO_INCREMENT primary key, o_name varchar(50))' at line 1
+MariaDB [pn123]> create table order(id INT NOT NULL AUTO_INCREMENT primary key, name varchar(50));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order(id INT NOT NULL AUTO_INCREMENT primary key, name varchar(50))' at line 1
+MariaDB [pn123]> create table order1(id INT NOT NULL AUTO_INCREMENT primary key, name varchar(50));
+Query OK, 0 rows affected (0.042 sec)
+
+MariaDB [pn123]> show tables;
++-----------------+
+| Tables_in_pn123 |
++-----------------+
+| cart            |
+| order1          |
+| user            |
++-----------------+
+3 rows in set (0.001 sec)
+
+MariaDB [pn123]> create table order1(o_id INT NOT NULL AUTO_INCREMENT primary key, name varchar(50), user_id INT NOT NULL, foreign key(user_id) references user(user_id));
+ERROR 1050 (42S01): Table 'order1' already exists
+MariaDB [pn123]> create table order2(o_id INT NOT NULL AUTO_INCREMENT primary key, name varchar(50), user_id INT NOT NULL, foreign key(user_id) references user(user_id));
+Query OK, 0 rows affected (0.032 sec)
+
+MariaDB [pn123]> create table order(o_id INT NOT NULL AUTO_INCREMENT primary key, name varchar(50), user_id INT NOT NULL, foreign key(user_id) references user(user_id));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order(o_id INT NOT NULL AUTO_INCREMENT primary key, name varchar(50), user_id...' at line 1
+MariaDB [pn123]> insert into order(name,user_id)value('MI',3);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'order(name,user_id)value('MI',3)' at line 1
+MariaDB [pn123]> insert into order2(name,user_id)value('MI',3);
+Query OK, 1 row affected (0.006 sec)
+
+MariaDB [pn123]> insert into order2(name,user_id)value('earphone',4);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [pn123]> insert into order2(name,user_id)value('bag',5);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [pn123]> select* from order2;
++------+----------+---------+
+| o_id | name     | user_id |
++------+----------+---------+
+|    1 | MI       |       3 |
+|    2 | earphone |       4 |
+|    3 | bag      |       5 |
++------+----------+---------+
+3 rows in set (0.001 sec)
+
+MariaDB [pn123]> select* from cart;
++------+---------+---------+---------+
+| c_id | p_name  | p_price | user_id |
++------+---------+---------+---------+
+|    1 | shikha  | 500     |       2 |
+|    2 | rishabh | 600     |       3 |
+|    3 | shikha  | 700     |       2 |
+|    4 | rishabh | 900     |       3 |
+|    5 | rishabh | 600     |       3 |
+|    6 | pen     | 900     |       3 |
+|    7 | pen     | 900     |       3 |
++------+---------+---------+---------+
+7 rows in set (0.000 sec)
+
+MariaDB [pn123]> select* from user;
++---------+---------+------------+--------+------+-------+
+| user_id | name    | phone      | salary | deft | email |
++---------+---------+------------+--------+------+-------+
+|       2 | shikha  | 9981584794 | 60000  | ECE  | NULL  |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |
+|       4 | anjali  | 8897584794 | 50000  | ME   | NULL  |
+|       5 | megha   | 9997584794 | 70000  | CE   | NULL  |
++---------+---------+------------+--------+------+-------+
+4 rows in set (0.001 sec)
+
+MariaDB [pn123]> select name P_price user inner join cart on user.user_id=cart.user_id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'user inner join cart on user.user_id=cart.user_id' at line 1
+MariaDB [pn123]> select name, P_price from user inner join cart on user.user_id=cart.user_id;
++---------+---------+
+| name    | P_price |
++---------+---------+
+| shikha  | 500     |
+| rishabh | 600     |
+| shikha  | 700     |
+| rishabh | 900     |
+| rishabh | 600     |
+| rishabh | 900     |
+| rishabh | 900     |
++---------+---------+
+7 rows in set (0.003 sec)
+
+MariaDB [pn123]> select name, P_price from user inner join cart on user.user_id=cart.user_id inner join oder2 on user.user_id=order2.user_id;
+ERROR 1146 (42S02): Table 'pn123.oder2' doesn't exist
+MariaDB [pn123]> select name, P_price from user inner join cart on user.user_id=cart.user_id inner join order2 on user.user_id=order2.user_id;
+ERROR 1052 (23000): Column 'name' in field list is ambiguous
+MariaDB [pn123]> select * from user inner join cart on user.user_id=cart.user_id inner join order2 on user.user_id=order2.user_id;
++---------+---------+------------+--------+------+-------+------+---------+---------+---------+------+------+---------+
+| user_id | name    | phone      | salary | deft | email | c_id | p_name  | p_price | user_id | o_id | name | user_id |
++---------+---------+------------+--------+------+-------+------+---------+---------+---------+------+------+---------+
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |    2 | rishabh | 600     |       3 |    1 | MI   |       3 |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |    4 | rishabh | 900     |       3 |    1 | MI   |       3 |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |    5 | rishabh | 600     |       3 |    1 | MI   |       3 |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |    6 | pen     | 900     |       3 |    1 | MI   |       3 |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |    7 | pen     | 900     |       3 |    1 | MI   |       3 |
++---------+---------+------------+--------+------+-------+------+---------+---------+---------+------+------+---------+
+5 rows in set (0.002 sec)
+
+MariaDB [pn123]> select * from user  join cart on user.user_id=cart.user_id  join order2 on user.user_id=order2.user_id;
++---------+---------+------------+--------+------+-------+------+---------+---------+---------+------+------+---------+
+| user_id | name    | phone      | salary | deft | email | c_id | p_name  | p_price | user_id | o_id | name | user_id |
++---------+---------+------------+--------+------+-------+------+---------+---------+---------+------+------+---------+
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |    2 | rishabh | 600     |       3 |    1 | MI   |       3 |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |    4 | rishabh | 900     |       3 |    1 | MI   |       3 |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |    5 | rishabh | 600     |       3 |    1 | MI   |       3 |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |    6 | pen     | 900     |       3 |    1 | MI   |       3 |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |    7 | pen     | 900     |       3 |    1 | MI   |       3 |
++---------+---------+------------+--------+------+-------+------+---------+---------+---------+------+------+---------+
+5 rows in set (0.001 sec)
+
+MariaDB [pn123]> create table payment(p_id int not null auto_increment primary key,payment_type varchar(10),user_id int not null,foreign key(user_id) references user(user_id));
+Query OK, 0 rows affected (0.029 sec)
+
+MariaDB [pn123]> insert into payment(payment_type,user_id)value(phonepe,2);
+ERROR 1054 (42S22): Unknown column 'phonepe' in 'field list'
+MariaDB [pn123]> insert into payment(payment_type,user_id)value('phonepe',2);
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [pn123]> insert into payment(payment_type,user_id)value('cod',2);
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [pn123]> insert into payment(payment_type,user_id)value('googlepay',4);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [pn123]> insert into payment(payment_type,user_id)value('paypal',3);
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [pn123]> insert into payment(payment_type,user_id)value('visa',3);
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [pn123]> select*from payment;
++------+--------------+---------+
+| p_id | payment_type | user_id |
++------+--------------+---------+
+|    1 | phonepe      |       2 |
+|    2 | cod          |       2 |
+|    3 | googlepay    |       4 |
+|    4 | paypal       |       3 |
+|    5 | visa         |       3 |
++------+--------------+---------+
+5 rows in set (0.000 sec)
+
+MariaDB [pn123]> select* from order2;
++------+----------+---------+
+| o_id | name     | user_id |
++------+----------+---------+
+|    1 | MI       |       3 |
+|    2 | earphone |       4 |
+|    3 | bag      |       5 |
++------+----------+---------+
+3 rows in set (0.002 sec)
+
+MariaDB [pn123]> select*from cart;
++------+---------+---------+---------+
+| c_id | p_name  | p_price | user_id |
++------+---------+---------+---------+
+|    1 | shikha  | 500     |       2 |
+|    2 | rishabh | 600     |       3 |
+|    3 | shikha  | 700     |       2 |
+|    4 | rishabh | 900     |       3 |
+|    5 | rishabh | 600     |       3 |
+|    6 | pen     | 900     |       3 |
+|    7 | pen     | 900     |       3 |
++------+---------+---------+---------+
+7 rows in set (0.001 sec)
+
+MariaDB [pn123]> select*from user;
++---------+---------+------------+--------+------+-------+
+| user_id | name    | phone      | salary | deft | email |
++---------+---------+------------+--------+------+-------+
+|       2 | shikha  | 9981584794 | 60000  | ECE  | NULL  |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |
+|       4 | anjali  | 8897584794 | 50000  | ME   | NULL  |
+|       5 | megha   | 9997584794 | 70000  | CE   | NULL  |
++---------+---------+------------+--------+------+-------+
+4 rows in set (0.001 sec)
+
+MariaDB [pn123]> select * from user  join cart on user.user_id=cart.user_id  join order2 on user.user_id=order2.user_id join payment on user.user_id=payment.user_id;
++---------+---------+------------+--------+------+-------+------+---------+---------+---------+------+------+---------+------+--------------+---------+
+| user_id | name    | phone      | salary | deft | email | c_id | p_name  | p_price | user_id | o_id | name | user_id | p_id | payment_type | user_id |
++---------+---------+------------+--------+------+-------+------+---------+---------+---------+------+------+---------+------+--------------+---------+
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |    2 | rishabh | 600     |       3 |    1 | MI   |       3 |    4 | paypal       |       3 |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |    2 | rishabh | 600     |       3 |    1 | MI   |       3 |    5 | visa         |       3 |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |    4 | rishabh | 900     |       3 |    1 | MI   |       3 |    4 | paypal       |       3 |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |    4 | rishabh | 900     |       3 |    1 | MI   |       3 |    5 | visa         |       3 |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |    5 | rishabh | 600     |       3 |    1 | MI   |       3 |    4 | paypal       |       3 |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |    5 | rishabh | 600     |       3 |    1 | MI   |       3 |    5 | visa         |       3 |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |    6 | pen     | 900     |       3 |    1 | MI   |       3 |    4 | paypal       |       3 |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |    6 | pen     | 900     |       3 |    1 | MI   |       3 |    5 | visa         |       3 |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |    7 | pen     | 900     |       3 |    1 | MI   |       3 |    4 | paypal       |       3 |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |    7 | pen     | 900     |       3 |    1 | MI   |       3 |    5 | visa         |       3 |
++---------+---------+------------+--------+------+-------+------+---------+---------+---------+------+------+---------+------+--------------+---------+
+10 rows in set (0.002 sec)
+
+MariaDB [pn123]> select name,deft,P_price,payment_type,P_name from user  join cart on user.user_id=cart.user_id  join order2 on user.user_id=order2.user_id join payment on user.user_id=payment.user_id;
+ERROR 1052 (23000): Column 'name' in field list is ambiguous
+MariaDB [pn123]> select deft,P_price,payment_type,P_name from user  join cart on user.user_id=cart.user_id  join order2 on user.user_id=order2.user_id join payment on user.user_id=payment.user_id;
++------+---------+--------------+---------+
+| deft | P_price | payment_type | P_name  |
++------+---------+--------------+---------+
+| CSE  | 600     | paypal       | rishabh |
+| CSE  | 600     | visa         | rishabh |
+| CSE  | 900     | paypal       | rishabh |
+| CSE  | 900     | visa         | rishabh |
+| CSE  | 600     | paypal       | rishabh |
+| CSE  | 600     | visa         | rishabh |
+| CSE  | 900     | paypal       | pen     |
+| CSE  | 900     | visa         | pen     |
+| CSE  | 900     | paypal       | pen     |
+| CSE  | 900     | visa         | pen     |
++------+---------+--------------+---------+
+10 rows in set (0.002 sec)
+
+MariaDB [pn123]> select user.name,deft,P_price,payment_type,P_name from user  join cart on user.user_id=cart.user_id  join order2 on user.user_id=order2.user_id join payment on user.user_id=payment.user_id;
++---------+------+---------+--------------+---------+
+| name    | deft | P_price | payment_type | P_name  |
++---------+------+---------+--------------+---------+
+| rishabh | CSE  | 600     | paypal       | rishabh |
+| rishabh | CSE  | 600     | visa         | rishabh |
+| rishabh | CSE  | 900     | paypal       | rishabh |
+| rishabh | CSE  | 900     | visa         | rishabh |
+| rishabh | CSE  | 600     | paypal       | rishabh |
+| rishabh | CSE  | 600     | visa         | rishabh |
+| rishabh | CSE  | 900     | paypal       | pen     |
+| rishabh | CSE  | 900     | visa         | pen     |
+| rishabh | CSE  | 900     | paypal       | pen     |
+| rishabh | CSE  | 900     | visa         | pen     |
++---------+------+---------+--------------+---------+
+10 rows in set (0.001 sec)
+
+MariaDB [pn123]> select user.name,deft,P_price,payment_type,P_name order2.name from user  join cart on user.user_id=cart.user_id  join order2 on user.user_id=order2.user_id join payment on user.user_id=payment.user_id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '.name from user  join cart on user.user_id=cart.user_id  join order2 on user....' at line 1
+MariaDB [pn123]> select user.name,deft,P_price,payment_type,P_name, order2.name from user  join cart on user.user_id=cart.user_id  join order2 on user.user_id=order2.user_id join payment on user.user_id=payment.user_id;
++---------+------+---------+--------------+---------+------+
+| name    | deft | P_price | payment_type | P_name  | name |
++---------+------+---------+--------------+---------+------+
+| rishabh | CSE  | 600     | paypal       | rishabh | MI   |
+| rishabh | CSE  | 600     | visa         | rishabh | MI   |
+| rishabh | CSE  | 900     | paypal       | rishabh | MI   |
+| rishabh | CSE  | 900     | visa         | rishabh | MI   |
+| rishabh | CSE  | 600     | paypal       | rishabh | MI   |
+| rishabh | CSE  | 600     | visa         | rishabh | MI   |
+| rishabh | CSE  | 900     | paypal       | pen     | MI   |
+| rishabh | CSE  | 900     | visa         | pen     | MI   |
+| rishabh | CSE  | 900     | paypal       | pen     | MI   |
+| rishabh | CSE  | 900     | visa         | pen     | MI   |
++---------+------+---------+--------------+---------+------+
+10 rows in set (0.001 sec)
+
+MariaDB [pn123]>

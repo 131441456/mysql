@@ -1,0 +1,17 @@
+git config --global user.name ""
+
+git config --global user.email ""
+
+git init
+
+git add -A  (for file ready)
+
+git status   (to check status)
+
+git commit -m "name"
+
+git branch -M main
+
+git remote...........
+
+git push.........

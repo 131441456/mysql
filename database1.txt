@@ -1,0 +1,85 @@
+
+Setting environment for using XAMPP for Windows.
+hp@DESKTOP-O8M241J c:\xampp
+# mysql -h localhost -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 22
+Server version: 10.4.18-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> create database pninfosys;
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| pninfosys          |
+| test               |
++--------------------+
+6 rows in set (0.002 sec)
+
+MariaDB [(none)]> use pninfosys;
+Database changed
+MariaDB [pninfosys]> create table dance(name varchar(50),address varchar(50));
+Query OK, 0 rows affected (0.044 sec)
+
+MariaDB [pninfosys]> desc dance;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| name    | varchar(50) | YES  |     | NULL    |       |
+| address | varchar(50) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+2 rows in set (0.027 sec)
+
+MariaDB [pninfosys]> create table singing(name varchar(50), address varchar(50));
+Query OK, 0 rows affected (0.027 sec)
+
+MariaDB [pninfosys]> desc singing;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| name    | varchar(50) | YES  |     | NULL    |       |
+| address | varchar(50) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+2 rows in set (0.026 sec)
+
+MariaDB [pninfosys]> create table sport (name varchar(50), age(5),address varchar(50),gender varchar(5));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '(5),address varchar(50),gender varchar(5))' at line 1
+MariaDB [pninfosys]> create table sport (name varchar(50), age varchar(5),address varchar(50),gender varchar(5));
+Query OK, 0 rows affected (0.034 sec)
+
+MariaDB [pninfosys]>  desc sport;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| name    | varchar(50) | YES  |     | NULL    |       |
+| age     | varchar(5)  | YES  |     | NULL    |       |
+| address | varchar(50) | YES  |     | NULL    |       |
+| gender  | varchar(5)  | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.027 sec)
+
+MariaDB [pninfosys]> create table art(name varchar(50), roll varchar(10), address varchar(50));
+Query OK, 0 rows affected (0.030 sec)
+
+MariaDB [pninfosys]> desc art;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| name    | varchar(50) | YES  |     | NULL    |       |
+| roll    | varchar(10) | YES  |     | NULL    |       |
+| address | varchar(50) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+3 rows in set (0.026 sec)
+
+MariaDB [pninfosys]> create database pninfosys;

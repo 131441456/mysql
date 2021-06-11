@@ -1,0 +1,351 @@
+
+Setting environment for using XAMPP for Windows.
+hp@DESKTOP-O8M241J c:\xampp
+# mysql -h localhost -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.4.18-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> create database pn123;
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [(none)]> use pn123;
+Database changed
+MariaDB [pn123]> create table user(user_id int not null auto_increment,name varchar(50),phone varcha
+    -> create table user(user_id int not null auto_increment,name varchar(50),phone varchar(10),salary varchar(20),deft varchar (50));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'create table user(user_id int not null auto_increment,name varchar(50),phone ...' at line 2
+MariaDB [pn123]> create table user(user_id int not null auto_increment,name varchar(50),phone varchar(10),salary varchar(20),deft varchar (50),primary key(user_id));
+Query OK, 0 rows affected (0.043 sec)
+
+MariaDB [pn123]> insert into user(name,phone,salary,deft)value('shivani',8962584794,20000,'hr');
+Query OK, 1 row affected (0.065 sec)
+
+MariaDB [pn123]> insert into user(name,phone,salary,deft)value('rohit',9981584794,30000,'ECE');
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [pn123]> insert into user(name,phone,salary,deft)value('rishabh',9847584794,40000,'CSE');
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [pn123]> insert into user(name,phone,salary,deft)value('anjali',8897584794,50000,'ME');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [pn123]> select* from user where name='anjali';
++---------+--------+------------+--------+------+
+| user_id | name   | phone      | salary | deft |
++---------+--------+------------+--------+------+
+|       4 | anjali | 8897584794 | 50000  | ME   |
++---------+--------+------------+--------+------+
+1 row in set (0.010 sec)
+
+MariaDB [pn123]> select * from user where name ='rohit' AND salary =30000;
++---------+-------+------------+--------+------+
+| user_id | name  | phone      | salary | deft |
++---------+-------+------------+--------+------+
+|       2 | rohit | 9981584794 | 30000  | ECE  |
++---------+-------+------------+--------+------+
+1 row in set (0.004 sec)
+
+MariaDB [pn123]> select * from user where name in('rishabh'and 'rohit');
++---------+---------+------------+--------+------+
+| user_id | name    | phone      | salary | deft |
++---------+---------+------------+--------+------+
+|       1 | shivani | 8962584794 | 20000  | hr   |
+|       2 | rohit   | 9981584794 | 30000  | ECE  |
+|       3 | rishabh | 9847584794 | 40000  | CSE  |
+|       4 | anjali  | 8897584794 | 50000  | ME   |
++---------+---------+------------+--------+------+
+4 rows in set, 13 warnings (0.003 sec)
+
+MariaDB [pn123]> select * from user where name in('rishabh');
++---------+---------+------------+--------+------+
+| user_id | name    | phone      | salary | deft |
++---------+---------+------------+--------+------+
+|       3 | rishabh | 9847584794 | 40000  | CSE  |
++---------+---------+------------+--------+------+
+1 row in set (0.001 sec)
+
+MariaDB [pn123]> select * from user where id BETWEEN 1 AND 3;
+ERROR 1054 (42S22): Unknown column 'id' in 'where clause'
+MariaDB [pn123]> select * from user where user_id BETWEEN 1 AND 3;
++---------+---------+------------+--------+------+
+| user_id | name    | phone      | salary | deft |
++---------+---------+------------+--------+------+
+|       1 | shivani | 8962584794 | 20000  | hr   |
+|       2 | rohit   | 9981584794 | 30000  | ECE  |
+|       3 | rishabh | 9847584794 | 40000  | CSE  |
++---------+---------+------------+--------+------+
+3 rows in set (0.002 sec)
+
+MariaDB [pn123]> select * from user where name like (%'r');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '%'r')' at line 1
+MariaDB [pn123]> select * from user where name like %'r';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '%'r'' at line 1MariaDB [pn123]> select * from user where name like 'r%';
++---------+---------+------------+--------+------+
+| user_id | name    | phone      | salary | deft |
++---------+---------+------------+--------+------+
+|       2 | rohit   | 9981584794 | 30000  | ECE  |
+|       3 | rishabh | 9847584794 | 40000  | CSE  |
++---------+---------+------------+--------+------+
+2 rows in set (0.001 sec)
+
+MariaDB [pn123]> select * from user order by user_id desc;
++---------+---------+------------+--------+------+
+| user_id | name    | phone      | salary | deft |
++---------+---------+------------+--------+------+
+|       4 | anjali  | 8897584794 | 50000  | ME   |
+|       3 | rishabh | 9847584794 | 40000  | CSE  |
+|       2 | rohit   | 9981584794 | 30000  | ECE  |
+|       1 | shivani | 8962584794 | 20000  | hr   |
++---------+---------+------------+--------+------+
+4 rows in set (0.000 sec)
+
+MariaDB [pn123]> select * from user where name !='shivani';
++---------+---------+------------+--------+------+
+| user_id | name    | phone      | salary | deft |
++---------+---------+------------+--------+------+
+|       2 | rohit   | 9981584794 | 30000  | ECE  |
+|       3 | rishabh | 9847584794 | 40000  | CSE  |
+|       4 | anjali  | 8897584794 | 50000  | ME   |
++---------+---------+------------+--------+------+
+3 rows in set (0.001 sec)
+
+MariaDB [pn123]> alter table user add column email varchar(20);
+Query OK, 0 rows affected (0.022 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [pn123]> desc user;
++---------+-------------+------+-----+---------+----------------+
+| Field   | Type        | Null | Key | Default | Extra          |
++---------+-------------+------+-----+---------+----------------+
+| user_id | int(11)     | NO   | PRI | NULL    | auto_increment |
+| name    | varchar(50) | YES  |     | NULL    |                |
+| phone   | varchar(10) | YES  |     | NULL    |                |
+| salary  | varchar(20) | YES  |     | NULL    |                |
+| deft    | varchar(50) | YES  |     | NULL    |                |
+| email   | varchar(20) | YES  |     | NULL    |                |
++---------+-------------+------+-----+---------+----------------+
+6 rows in set (0.054 sec)
+
+MariaDB [pn123]> alter table user add constraint unique key('email');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''email')' at line 1
+MariaDB [pn123]> alter table user add constraint unique key(email);
+Query OK, 0 rows affected (0.021 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [pn123]> select * from user;
++---------+---------+------------+--------+------+-------+
+| user_id | name    | phone      | salary | deft | email |
++---------+---------+------------+--------+------+-------+
+|       1 | shivani | 8962584794 | 20000  | hr   | NULL  |
+|       2 | rohit   | 9981584794 | 30000  | ECE  | NULL  |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |
+|       4 | anjali  | 8897584794 | 50000  | ME   | NULL  |
++---------+---------+------------+--------+------+-------+
+4 rows in set (0.001 sec)
+
+MariaDB [pn123]> update user set name ='shikha', salary=60000 where user_id=2;
+Query OK, 1 row affected (0.005 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [pn123]> delete from user where id=1;
+ERROR 1054 (42S22): Unknown column 'id' in 'where clause'
+MariaDB [pn123]> delete from user where user_id=1;
+Query OK, 1 row affected (0.006 sec)
+
+MariaDB [pn123]> select * from user;
++---------+---------+------------+--------+------+-------+
+| user_id | name    | phone      | salary | deft | email |
++---------+---------+------------+--------+------+-------+
+|       2 | shikha  | 9981584794 | 60000  | ECE  | NULL  |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |
+|       4 | anjali  | 8897584794 | 50000  | ME   | NULL  |
++---------+---------+------------+--------+------+-------+
+3 rows in set (0.000 sec)
+
+MariaDB [pn123]> select name,salary from user where salary=(selectmax(salary)from user);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'from user)' at line 1
+MariaDB [pn123]> select name,salary from user where salary=(select max(salary) from user);
++--------+--------+
+| name   | salary |
++--------+--------+
+| shikha | 60000  |
++--------+--------+
+1 row in set (0.008 sec)
+
+MariaDB [pn123]> select name,salary from user where salary=(select min(salary) from user);
++---------+--------+
+| name    | salary |
++---------+--------+
+| rishabh | 40000  |
++---------+--------+
+1 row in set (0.000 sec)
+
+MariaDB [pn123]> insert into user(name,phone,salary,deft)value('megha',9997584794,70000,'CE');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [pn123]> create table cart;
+ERROR 1113 (42000): A table must have at least 1 column
+MariaDB [pn123]> create table cart(did int not null auto_increment primary key, p_name varchar(50),p_price varchar(20),user_id INT NOT NULL,foreign key(c_id) reference user(user_id));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'reference user(user_id))' at line 1
+MariaDB [pn123]> create table cart(c_id int not null auto_increment primary key, p_name varchar(50),p_price varchar(20),user_id INT NOT NULL,foreign key(c_id) reference user(user_id));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'reference user(user_id))' at line 1
+MariaDB [pn123]> create table cart(c_id int not null auto_increment primary key, p_name varchar(50),p_price varchar(20),user_id INT NOT NULL,foreign key(user_id) reference user(user_id));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'reference user(user_id))' at line 1
+MariaDB [pn123]> create table cart(c_id int not null auto_increment primary key, p_name varchar(50),p_price varchar(20),user_id INT NOT NULL,foreign key(user_id) references user(user_id));
+Query OK, 0 rows affected (0.033 sec)
+
+MariaDB [pn123]> insert into cart(name,price,user_id)value('ece',1);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+MariaDB [pn123]> insert into cart(name,price,user_id)value('ece',1);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+MariaDB [pn123]> select *from user;
++---------+---------+------------+--------+------+-------+
+| user_id | name    | phone      | salary | deft | email |
++---------+---------+------------+--------+------+-------+
+|       2 | shikha  | 9981584794 | 60000  | ECE  | NULL  |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |
+|       4 | anjali  | 8897584794 | 50000  | ME   | NULL  |
+|       5 | megha   | 9997584794 | 70000  | CE   | NULL  |
++---------+---------+------------+--------+------+-------+
+4 rows in set (0.000 sec)
+
+MariaDB [pn123]> insert into cart(name,price,user_id)value('shikha',500,2);
+ERROR 1054 (42S22): Unknown column 'name' in 'field list'
+MariaDB [pn123]> insert into cart(p_name,p_price,user_id)value('shikha',500,2);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [pn123]> insert into cart(p_name,p_price,user_id)value('rishabh',600,3);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [pn123]> insert into cart(p_name,p_price,user_id)value('shikha',700,2);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [pn123]> insert into cart(p_name,p_price,user_id)value('rishabh',900,3);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [pn123]> select * from cart;
++------+---------+---------+---------+
+| c_id | p_name  | p_price | user_id |
++------+---------+---------+---------+
+|    1 | shikha  | 500     |       2 |
+|    2 | rishabh | 600     |       3 |
+|    3 | shikha  | 700     |       2 |
+|    4 | rishabh | 900     |       3 |
++------+---------+---------+---------+
+4 rows in set (0.002 sec)
+
+MariaDB [pn123]> select * from user join cart on user.user_id=cart.c_id;
++---------+---------+------------+--------+------+-------+------+---------+---------+---------+
+| user_id | name    | phone      | salary | deft | email | c_id | p_name  | p_price | user_id |
++---------+---------+------------+--------+------+-------+------+---------+---------+---------+
+|       2 | shikha  | 9981584794 | 60000  | ECE  | NULL  |    2 | rishabh | 600     |       3 |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |    3 | shikha  | 700     |       2 |
+|       4 | anjali  | 8897584794 | 50000  | ME   | NULL  |    4 | rishabh | 900     |       3 |
++---------+---------+------------+--------+------+-------+------+---------+---------+---------+
+3 rows in set (0.006 sec)
+
+MariaDB [pn123]> insert into cart(p_name,p_price,user_id)value('rishabh',600,3);
+Query OK, 1 row affected (0.006 sec)
+
+MariaDB [pn123]> select * from user join cart on user.user_id=cart.c_id;
++---------+---------+------------+--------+------+-------+------+---------+---------+---------+
+| user_id | name    | phone      | salary | deft | email | c_id | p_name  | p_price | user_id |
++---------+---------+------------+--------+------+-------+------+---------+---------+---------+
+|       2 | shikha  | 9981584794 | 60000  | ECE  | NULL  |    2 | rishabh | 600     |       3 |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |    3 | shikha  | 700     |       2 |
+|       4 | anjali  | 8897584794 | 50000  | ME   | NULL  |    4 | rishabh | 900     |       3 |
+|       5 | megha   | 9997584794 | 70000  | CE   | NULL  |    5 | rishabh | 600     |       3 |
++---------+---------+------------+--------+------+-------+------+---------+---------+---------+
+4 rows in set (0.003 sec)
+
+MariaDB [pn123]> insert into cart(p_name,p_price,user_id)value('pen',900,3);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [pn123]> insert into cart(p_name,p_price,user_id)value('pen',900,3);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [pn123]> select * from user inner join cart on user.user_id=cart.c_id;
++---------+---------+------------+--------+------+-------+------+---------+---------+---------+
+| user_id | name    | phone      | salary | deft | email | c_id | p_name  | p_price | user_id |
++---------+---------+------------+--------+------+-------+------+---------+---------+---------+
+|       2 | shikha  | 9981584794 | 60000  | ECE  | NULL  |    2 | rishabh | 600     |       3 |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |    3 | shikha  | 700     |       2 |
+|       4 | anjali  | 8897584794 | 50000  | ME   | NULL  |    4 | rishabh | 900     |       3 |
+|       5 | megha   | 9997584794 | 70000  | CE   | NULL  |    5 | rishabh | 600     |       3 |
++---------+---------+------------+--------+------+-------+------+---------+---------+---------+
+4 rows in set (0.001 sec)
+
+MariaDB [pn123]> select * from user;
++---------+---------+------------+--------+------+-------+
+| user_id | name    | phone      | salary | deft | email |
++---------+---------+------------+--------+------+-------+
+|       2 | shikha  | 9981584794 | 60000  | ECE  | NULL  |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |
+|       4 | anjali  | 8897584794 | 50000  | ME   | NULL  |
+|       5 | megha   | 9997584794 | 70000  | CE   | NULL  |
++---------+---------+------------+--------+------+-------+
+4 rows in set (0.001 sec)
+
+MariaDB [pn123]> select * from cart;
++------+---------+---------+---------+
+| c_id | p_name  | p_price | user_id |
++------+---------+---------+---------+
+|    1 | shikha  | 500     |       2 |
+|    2 | rishabh | 600     |       3 |
+|    3 | shikha  | 700     |       2 |
+|    4 | rishabh | 900     |       3 |
+|    5 | rishabh | 600     |       3 |
+|    6 | pen     | 900     |       3 |
+|    7 | pen     | 900     |       3 |
++------+---------+---------+---------+
+7 rows in set (0.001 sec)
+
+MariaDB [pn123]> select * from user join cart on user.user_id=cart.c_id;
++---------+---------+------------+--------+------+-------+------+---------+---------+---------+
+| user_id | name    | phone      | salary | deft | email | c_id | p_name  | p_price | user_id |
++---------+---------+------------+--------+------+-------+------+---------+---------+---------+
+|       2 | shikha  | 9981584794 | 60000  | ECE  | NULL  |    2 | rishabh | 600     |       3 |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |    3 | shikha  | 700     |       2 |
+|       4 | anjali  | 8897584794 | 50000  | ME   | NULL  |    4 | rishabh | 900     |       3 |
+|       5 | megha   | 9997584794 | 70000  | CE   | NULL  |    5 | rishabh | 600     |       3 |
++---------+---------+------------+--------+------+-------+------+---------+---------+---------+
+4 rows in set (0.001 sec)
+
+MariaDB [pn123]> select * from user join cart on user.user_id=cart.user_id;
++---------+---------+------------+--------+------+-------+------+---------+---------+---------+
+| user_id | name    | phone      | salary | deft | email | c_id | p_name  | p_price | user_id |
++---------+---------+------------+--------+------+-------+------+---------+---------+---------+
+|       2 | shikha  | 9981584794 | 60000  | ECE  | NULL  |    1 | shikha  | 500     |       2 |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |    2 | rishabh | 600     |       3 |
+|       2 | shikha  | 9981584794 | 60000  | ECE  | NULL  |    3 | shikha  | 700     |       2 |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |    4 | rishabh | 900     |       3 |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |    5 | rishabh | 600     |       3 |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |    6 | pen     | 900     |       3 |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |    7 | pen     | 900     |       3 |
++---------+---------+------------+--------+------+-------+------+---------+---------+---------+
+7 rows in set (0.001 sec)
+
+MariaDB [pn123]> select * from userleft  join cart on user.user_id=cart.user_id;
+ERROR 1146 (42S02): Table 'pn123.userleft' doesn't exist
+MariaDB [pn123]> select * from user left  join cart on user.user_id=cart.user_id;
++---------+---------+------------+--------+------+-------+------+---------+---------+---------+
+| user_id | name    | phone      | salary | deft | email | c_id | p_name  | p_price | user_id |
++---------+---------+------------+--------+------+-------+------+---------+---------+---------+
+|       2 | shikha  | 9981584794 | 60000  | ECE  | NULL  |    1 | shikha  | 500     |       2 |
+|       2 | shikha  | 9981584794 | 60000  | ECE  | NULL  |    3 | shikha  | 700     |       2 |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |    2 | rishabh | 600     |       3 |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |    4 | rishabh | 900     |       3 |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |    5 | rishabh | 600     |       3 |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |    6 | pen     | 900     |       3 |
+|       3 | rishabh | 9847584794 | 40000  | CSE  | NULL  |    7 | pen     | 900     |       3 |
+|       4 | anjali  | 8897584794 | 50000  | ME   | NULL  | NULL | NULL    | NULL    |    NULL |
+|       5 | megha   | 9997584794 | 70000  | CE   | NULL  | NULL | NULL    | NULL    |    NULL |
++---------+---------+------------+--------+------+-------+------+---------+---------+---------+
+9 rows in set (0.001 sec)
+
+MariaDB [pn123]>

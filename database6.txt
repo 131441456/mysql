@@ -1,0 +1,114 @@
+
+Setting environment for using XAMPP for Windows.
+hp@DESKTOP-O8M241J c:\xampp
+# mysql -h localhost -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.4.18-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| delhi              |
+| information_schema |
+| itm                |
+| mits               |
+| mits6              |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| pninfosys          |
+| rjit               |
+| test               |
++--------------------+
+11 rows in set (0.064 sec)
+
+MariaDB [(none)]> use rjit;
+Database changed
+MariaDB [rjit]> create table employee(e_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, ename varchar(40),address varchar(40));
+Query OK, 0 rows affected (0.047 sec)
+
+MariaDB [rjit]> insert into employee(ename,address)value('shivani','gwl');
+Query OK, 1 row affected (0.072 sec)
+
+MariaDB [rjit]> insert into employee(ename,address)value('shikha','delhi');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [rjit]> insert into employee(ename,address)value('rohit','pune');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [rjit]> insert into employee(ename,address)value('rohit','pune');
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [rjit]> create table department(did INT NOT NULL AUTO_INCREMENT PRIMARYKEY,dname varchar(40),eid INT NOT NULL,FOREIGN KEY(eid) REFERENCE employee(e_id));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'dname varchar(40),eid INT NOT NULL,FOREIGN KEY(eid) REFERENCE employee(e_id))' at line 1
+MariaDB [rjit]> create table department(did int NOT NULL AUTO_INCREMENT PRIMARY KEY,dname varchar(40),eid INT NOT NULL,FOREIGN KEY(eid) REFERENCES employee(e_id));
+Query OK, 0 rows affected (0.041 sec)
+
+MariaDB [rjit]> insert into department(dname,eid)value('ec',1);
+Query OK, 1 row affected (0.006 sec)
+
+MariaDB [rjit]> insert into department(dname,eid)value('cs',1);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [rjit]> insert into department(dname,eid)value('it',1);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [rjit]> insert into department(dname,eid)value('me',2);
+Query OK, 1 row affected (0.006 sec)
+
+MariaDB [rjit]> select * from employee;
++------+---------+---------+
+| e_id | ename   | address |
++------+---------+---------+
+|    1 | shivani | gwl     |
+|    2 | shikha  | delhi   |
+|    3 | rohit   | pune    |
+|    4 | rohit   | pune    |
++------+---------+---------+
+4 rows in set (0.004 sec)
+
+MariaDB [rjit]> select * from department;
++-----+-------+-----+
+| did | dname | eid |
++-----+-------+-----+
+|   1 | ec    |   1 |
+|   2 | cs    |   1 |
+|   3 | it    |   1 |
+|   4 | me    |   2 |
++-----+-------+-----+
+4 rows in set (0.001 sec)
+
+MariaDB [rjit]> select * from employee join department employee.e_id = department.e_id;
+ERROR 1066 (42000): Not unique table/alias: 'employee'
+MariaDB [rjit]> select * from employee join department on employee.e_id = department.e_id;
+ERROR 1054 (42S22): Unknown column 'department.e_id' in 'on clause'
+MariaDB [rjit]> select * from employee join department on employee.e_id = department.eid;
++------+---------+---------+-----+-------+-----+
+| e_id | ename   | address | did | dname | eid |
++------+---------+---------+-----+-------+-----+
+|    1 | shivani | gwl     |   1 | ec    |   1 |
+|    1 | shivani | gwl     |   2 | cs    |   1 |
+|    1 | shivani | gwl     |   3 | it    |   1 |
+|    2 | shikha  | delhi   |   4 | me    |   2 |
++------+---------+---------+-----+-------+-----+
+4 rows in set (0.012 sec)
+
+MariaDB [rjit]> select ename,dname from employee join department on employee.e_id = department.eid;
++---------+-------+
+| ename   | dname |
++---------+-------+
+| shivani | ec    |
+| shivani | cs    |
+| shivani | it    |
+| shikha  | me    |
++---------+-------+
+4 rows in set (0.001 sec)
+
+MariaDB [rjit]>
